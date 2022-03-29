@@ -48,12 +48,6 @@ function setup() {
 
 function draw() {
   background(0)
-  if (gameState === "PLAY") {
-    if (keyDown("space") && energy_left > 0) {
-      Jump()
-      energy_left = energy_left - 1
-    }
-  }
 
   hero.velocityY = hero.velocityY + 0.8
   spawnRewards()
@@ -73,6 +67,7 @@ function draw() {
     hero.changeAnimation("end")
 
   }
+  
   image(bg_img, a, 0, width, height);
   image(bg_img, b, 0, width, height);
 
@@ -85,6 +80,7 @@ function draw() {
   if (b < -width) {
     b = width;
   }
+
   if (hero.collide(ground)) {
     hero.changeAnimation("run")
   }
@@ -149,9 +145,18 @@ function showEnergyBar() {
   push();
   image(energyimg, 40, 45, 40, 40);
   fill("white");
-  rect(87, 55, 185, 20);
+  rect(87, 55, 200, 20);
   fill("red");
   rect(87, 55, energy_left, 20);
   noStroke();
   pop();
+}
+function keyPressed()
+{
+  if(keyCode === 32 && gameState==="PLAY"){
+    if(energy_left>0 ){
+    Jump()
+    energy_left=energy_left-2
+    }
+   }  
 }
